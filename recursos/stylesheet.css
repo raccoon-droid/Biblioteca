@@ -1,0 +1,518 @@
+/*================================*/
+        /*Hoja de Estilos*/
+/*================================*/
+:root{
+    /*Generales*/
+    --texto: #1d3935;
+    --titulos: #0A2A5E;
+    --tclaro: #fceee3;
+    --fondo:#bbd8ff;
+
+    /*Colores de la tabla*/
+    --filtros: #dee8f3;
+    --fila_a: #a4c6f5;
+    --fila_b: #7da2d6;
+    --hfila: #e2eeff;
+    --Thead:#0A2A5E;
+
+    /*Colores de los botones*/
+    --b: #f5ca56;
+    --botones: #ffe77c;
+    --g: #aceec4;
+    --guardar: #1B8F45;
+    --hguardar: #14602F;
+    --l: #b6d3f8;
+    --limpiar: #1558B0;
+    --r: #f6c4c4;
+    --eliminar: #A12B2B;
+
+    /*Colores de los avisos*/
+    --advertencia: #8a6100;
+}
+
+    /*Estilos del cuerpo de la página*/
+body{
+    background-color: var(--titulos);
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+header{
+    background-color: var(--titulos);
+    color: var(--tclaro);
+}
+
+main{
+    margin: 0;
+    padding: 1rem;
+    text-align: justify;
+    line-height: 1.6;
+    background-color: var(--fondo);
+    color: var(--texto);
+    border-radius: 10px;
+}
+
+footer{
+    padding: 1rem;
+    color: var(--tclaro);
+    font-size: 0.85rem;
+}
+
+footer a{
+    color: var(--botones);
+}
+
+h2 {
+    color: var(--titulos);
+    border-bottom: 3px solid currentColor;  /* Toma el color del texto de cada título */
+    padding-bottom: 0.3rem;
+}
+
+    /*Texto de ayuda debajo de los títulos*/
+.nota{
+    margin: 0.3rem 0 0.8rem;
+    font-size: 0.9rem;
+}
+
+    /*Mensaje de error del formulario*/
+#form-error{
+    color: var(--eliminar);
+    font-weight: bold;
+}
+
+    /*Contenedor del formulario de búsqueda*/
+.formulario{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0 1rem;
+    align-items: end;
+    text-align: left;
+}
+
+.formulario h3{
+    margin-bottom: 0;
+}
+
+    /*Alinea el botón de buscar con la base de los campos*/
+.formulario > div:last-child{
+    margin-bottom: 1rem;
+}
+
+    /*Campos y listas del formulario*/
+input[type="search"], input[type="number"], select{
+    font-family: inherit;
+    padding: 0.5rem;
+    color: var(--texto);
+    background-color: var(--tclaro);
+    border: 2px solid var(--titulos);
+    border-radius: 5px;
+}
+
+    /*Auto dimensionar los campos del formulario*/
+#q, #lang, #year-from, #year-to{
+    box-sizing: border-box;   /* para que todos los campos midan lo mismo de alto */
+    field-sizing: content;
+    min-height: 3rem;
+    min-width: 120px;
+    max-width: 100%;
+    max-height: 300px;
+}
+
+#q{
+    min-width: min(320px, 100%);
+}
+
+    /*Estilos de los botones generales*/
+button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-family: inherit;
+    color: var(--texto);
+    background-color: var(--b);
+    border-radius: 5px;
+    border: solid var(--botones);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+        /*Animación al pasar el puntero por encima*/
+button:hover:not(:disabled){
+    background: var(--botones);
+    color: var(--texto)
+}
+
+button:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+    /*Botones pequeños (reintentar, aceptar, eliminar...)*/
+.small{
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+    /*Estilos del botón de buscar y de guardar*/
+#search-btn, .primary { 
+    padding: 1rem;
+    background: var(--g); 
+    color: var(--guardar); 
+    border-radius: 10px;
+    border: solid var(--guardar); 
+    transition: background-color 0.2s ease;
+}
+        /*Animación al pasar el puntero por encima*/
+#search-btn:hover:not(:disabled), .primary:hover:not(:disabled) { 
+    background: var(--guardar);
+    color: var(--tclaro);  
+}
+
+    /*Estilos del botón de eliminar*/
+.danger { 
+    padding: 1rem;
+    background: var(--r); 
+    color: var(--eliminar); 
+    border-radius: 10px;
+    border: solid var(--eliminar);
+    transition: background-color 0.2s ease; 
+}
+
+        /*Animación al pasar el puntero por encima*/
+.danger:hover:not(:disabled) { 
+    background: var(--eliminar);
+    color: var(--tclaro); 
+}
+
+    /*Filas de botones*/
+.acciones{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.acciones.derecha{
+    justify-content: flex-end;
+}
+
+    /*Estilos de las tablas*/
+.envoltura{
+position: relative;   /* para que el recorte también aplique al texto oculto (.sr-only) */
+    overflow-x: auto;
+}
+
+table{
+    border-width: 5px;
+    border-style: solid;
+    width: 100%;
+    min-width: 640px;
+}
+
+        /*Ajuste de los encabezados de las tablas*/
+thead{
+    text-align: center;
+}
+
+thead, th{
+    background-color: var(--Thead);
+    color: var(--tclaro);
+    text-align: center;
+}
+
+tbody, td{
+    padding: 0.5rem 1rem;
+    text-align: left;
+}
+
+tr {
+    background-color: var(--fila_a);
+}
+
+tr:nth-child(even) {
+    background-color: var(--fila_b);
+}
+
+tr:hover {
+    background-color: var(--hfila);
+}
+
+        /*Las filas de resultados se pueden seleccionar*/
+tr.clickable{
+    cursor: pointer;
+}
+
+        /*Resalta la fila del libro recién guardado*/
+tr.just-added{
+    animation: resaltar 2.2s ease-out;
+}
+
+@keyframes resaltar{
+    from { background-color: var(--botones); }
+}
+
+.title{
+    font-weight: bold;
+}
+
+.muted{
+    color: var(--titulos);
+    font-size: 0.85rem;
+}
+
+.empty-cell{
+    text-align: center;
+}
+
+        /*Descripción del libro (se recorta y se puede expandir)*/
+.desc{
+    max-width: 380px;
+    font-size: 0.9rem;
+    white-space: pre-line;
+}
+
+.desc.clamped{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.link-btn{
+    padding: 0.2rem 0;
+    background: none;
+    border: 0;
+    color: var(--limpiar);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.link-btn:hover:not(:disabled){
+    background: none;
+    color: var(--titulos);
+    text-decoration: underline;
+}
+
+        /*Mientras se guarda un libro, la tabla de resultados se bloquea*/
+.busy{
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+    /*Paginación*/
+.paginacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+    /*Mensajes de carga, resultado vacío y error*/
+.status{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--filtros);
+    border: 2px dashed var(--fila_b);
+    border-radius: 8px;
+}
+
+.status.error{
+    color: var(--eliminar);
+    border-style: solid;
+    border-color: var(--eliminar);
+}
+
+.spinner{
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--fila_a);
+    border-top-color: var(--limpiar);
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar{
+    to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .spinner{ animation-duration: 3s; }
+}
+
+    /*Encabezados con filtro estilo Excel*/
+.th-inner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+.sort-ind{
+    min-width: 0.8em;
+    font-weight: bold;
+    color: var(--botones);
+}
+
+.th-filter{
+    padding: 0.15rem 0.4rem;
+    font-size: 0.75rem;
+    background: var(--filtros);
+    color: var(--titulos);
+    border: 2px solid var(--filtros);
+    border-radius: 4px;
+}
+
+.th-filter:hover:not(:disabled), .th-filter.active{
+    background: var(--botones);
+    border-color: var(--b);
+    color: var(--texto);
+}
+
+        /*Menú desplegable del filtro*/
+.filter-menu{
+    position: absolute;
+    z-index: 20;
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background-color: var(--filtros);
+    color: var(--texto);
+    border: 3px solid var(--titulos);
+    border-radius: 8px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    font-size: 0.9rem;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.menu-item{
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.4rem 0.5rem;
+    background: transparent;
+    border: 0;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.menu-item:hover:not(:disabled){
+    background: var(--hfila);
+}
+
+.menu-item:disabled{
+    opacity: 0.45;
+}
+
+.menu-sep{
+    width: 100%;
+    margin: 2px 0;
+    border: 0;
+    border-top: 1px solid var(--fila_b);
+}
+
+.menu-box{
+    max-height: 230px;
+    overflow: auto;
+    padding: 4px;
+    background-color: var(--tclaro);
+    border: 2px solid var(--fila_b);
+    border-radius: 6px;
+}
+
+.menu-check{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.menu-check:hover{
+    background-color: var(--hfila);
+}
+
+.menu-check.all{
+    font-weight: bold;
+    border-bottom: 1px solid var(--fila_b);
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 2px;
+}
+
+.menu-actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+    /*Ventana de confirmación*/
+dialog{
+    width: 100%;
+    max-width: min(440px, calc(100vw - 32px));
+    padding: 0;
+    background-color: var(--fondo);
+    color: var(--texto);
+    border: 3px solid var(--titulos);
+    border-radius: 10px;
+    text-align: left;
+}
+
+dialog::backdrop{
+    background: rgba(10, 42, 94, 0.65);
+}
+
+dialog form{
+    padding: 1.2rem;
+}
+
+dialog h2{
+    margin-top: 0;
+}
+
+#dialog-body{
+    margin-bottom: 0.8rem;
+}
+
+    /*Avisos temporales*/
+.notice{
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 30;
+    max-width: min(520px, calc(100vw - 32px));
+    padding: 0.8rem 1rem;
+    background-color: var(--titulos);
+    color: var(--tclaro);
+    border-left: 6px solid var(--botones);
+    border-radius: 10px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+    text-align: left;
+}
+
+.notice.success{ border-left-color: var(--guardar); }
+.notice.warn{ border-left-color: var(--b); }
+.notice.error{ border-left-color: var(--eliminar); }
+
+    /*Foco visible para navegar con teclado*/
+button:focus-visible, input:focus-visible, select:focus-visible, tr.clickable:focus-visible{
+    outline: 3px solid var(--titulos);
+    outline-offset: 2px;
+}
+
+    /*Elementos ocultos desde el script*/
+[hidden]{
+    display: none !important;
+}
