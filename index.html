@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--==============================================================-->
+<!--   Elaborado para el lab de programación web                   -->
+<!--==============================================================-->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <!--Se adjunta el archivo de la hoja de estilos-->
+    <link rel="stylesheet" href="recursos/stylesheet.css">
+    <!--Se adjunta el archivo del script usado en la biblioteca-->
+    <script src="recursos/biblioteca.js"></script>
+
+</head>
+<body>
+
+    <!--Título de la página-->
+    <header>
+        <h1>Biblioteca</h1>
+    </header>
+<main>
+    <!--Mensaje de bienvenida-->
+    <h2>Bienvenido a esta aplicación realizada para el laboratorio de Programación Web</h2>
+    <p>Usa el formulario de la siguiente sección para buscar libros por medio de la API de Open Library</p>
+    <h2>Buscar un libro:</h2>
+    <!--Formulario para buscar libros en la API-->
+    <form id="search-form" novalidate>
+
+        <!--Contendor padre-->
+        <div class="formulario">
+
+            <!--Campos para realizar la búsqueda-->
+            <div>
+                <h3><label for="q">Título, autor o tema:</label></h3>
+                <p><input id="q" type="search" autocomplete="off" required placeholder="Introduzca el título, autor o tema ej. Cien años de soledad"></p>
+            </div>
+
+            <div>
+                <h3><label for="lang">Idioma:</label></h3>
+                <!--Lista desplegable de idiomas (se llena desde el script)-->
+                <p><select id="lang"></select></p>
+            </div>
+
+            <div>
+                <h3><label for="year-from">Año desde:</label></h3>
+                <p><input id="year-from" type="number" inputmode="numeric" min="0" max="9999" placeholder="ej. 1900"></p>
+            </div>
+
+            <div>
+                <h3><label for="year-to">Año hasta:</label></h3>
+                <p><input id="year-to" type="number" inputmode="numeric" min="0" max="9999" placeholder="ej. 2026"></p>
+            </div>
+
+            <div>
+                <!--Botón para buscar-->
+                <button type="submit" id="search-btn">Buscar</button>
+            </div>
+        </div>
+
+        <!--Mensaje de error del formulario-->
+        <p id="form-error" role="alert" hidden></p>
+    </form>
+
+    <!--Resultados de la búsqueda (son temporales: al elegir un libro se descartan los demás)-->
+    <section id="results-section" hidden>
+        <h2 id="results-title">Resultados</h2>
+        <p class="nota">Haz clic en una fila para guardar ese libro en tu tabla. Antes te pediremos confirmación.</p>
+
+        <!--Mensajes de carga, resultado vacío y errores-->
+        <div id="results-status" class="status" role="status" aria-live="polite" hidden></div>
+
+        <!--Información presentada en una tabla-->
+        <div id="results-wrap" class="envoltura" hidden>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Publicación</th>
+                        <th scope="col">Idioma</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body"></tbody>
+            </table>
+        </div>
+
+        <!--Paginación de los resultados-->
+        <nav id="pagination" class="paginacion" aria-label="Paginación de resultados" hidden>
+            <button type="button" id="prev-btn" class="btn">Anterior</button>
+            <span id="page-info"></span>
+            <button type="button" id="next-btn" class="btn">Siguiente</button>
+        </nav>
+    </section>
+
+    <!--Titulo de la tabla guardada-->
+    <h2 id="library-title">Mi tabla</h2>
+    <p class="nota">Usa la flecha ▾ de cada encabezado para filtrar y ordenar, como en Excel.</p>
+
+    <p id="saved-count" class="nota" aria-live="polite"></p>
+
+    <!--Mensaje cuando no hay libros guardados-->
+    <div id="saved-empty" class="status empty" hidden></div>
+
+    <!--Información presentada en una tabla-->
+    <div id="saved-wrap" class="envoltura" hidden>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col" data-col="autor">Autor</th>
+                    <th scope="col" data-col="titulo">Libro</th>
+                    <th scope="col" data-col="anio">Publicación</th>
+                    <th scope="col" data-col="idioma">Idioma</th>
+                    <th scope="col" data-col="descripcion">Descripción</th>
+                    <th scope="col"><span class="sr-only">Acciones</span></th>
+                </tr>
+            </thead>
+            <tbody id="saved-body"></tbody>
+        </table>
+    </div>
+</main>
+
+<footer>
+    Datos obtenidos de <a href="https://openlibrary.org" target="_blank" rel="noopener">Open Library</a>.
+</footer>
+
+<!--Ventana de confirmación antes de guardar un libro-->
+<dialog id="confirm-dialog" aria-labelledby="dialog-title">
+    <form method="dialog">
+        <h2 id="dialog-title">¿Guardar este libro en tu tabla?</h2>
+        <div id="dialog-body"></div>
+        <p class="nota">Si lo guardas, se descartarán los demás resultados de la búsqueda.</p>
+        <div class="acciones derecha">
+            <button value="cancel">Cancelar</button>
+            <button value="save" class="primary" autofocus>Guardar libro</button>
+        </div>
+    </form>
+</dialog>
+
+<!--Avisos temporales-->
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+</body>
+</html>
